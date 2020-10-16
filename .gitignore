@@ -1,1 +1,2 @@
-vfv
+*.env
+node_modules
