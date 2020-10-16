@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login, getUsers ,addTrip,allTrip} = require('./controller');
+const { register, login, getUsers , addTrip, allTrip ,putTrip} = require('./controller');
 
 const middleware = require('./middlewares');
 
@@ -44,4 +44,12 @@ authRouter.get('/all',async(req,res) => {
         throw err;
       }
 })
+authRouter.put("/put",async (req,res)=>{
+    try {
+        res.json(await putTrip(req.body));
+      } catch (err) {
+        throw err;
+      }
+})
+ 
 module.exports =authRouter

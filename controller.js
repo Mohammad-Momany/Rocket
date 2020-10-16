@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { users, roles ,trips} = require('./models');
 
@@ -68,9 +68,13 @@ const addTrip = (trip)=>{
      return trips
  }
  const putTrip = async (user)=>{
-    const savedUser = users.filter((u) => u.email === user.email);
-    const tripOwner = trips.filter((t)=>{ savedUser === trips.owner })
-    console.log(tripOwner);
+     if(!(users[0].email === trips[0].owner)){
+         return "it isn't allowed for you"
+     }
+     if(users[0].email === trips[0].owner){
+         
+        return "it's allowed for you"
+    }
  } 
 module.exports = {
   register,
