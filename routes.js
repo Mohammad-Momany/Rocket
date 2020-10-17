@@ -10,7 +10,6 @@ authRouter.get('/', async (req, res) => {
 });
 
 authRouter.get('/protected', middleware, (req, res) => {
-  // res.json('Hello World');
   res.json(['ali','khalil']);
 });
 
@@ -51,9 +50,6 @@ authRouter.put("/put/:id/email",async (req,res)=>{
      const place= req.body.place
      const numOfPeople= req.body.numOfPeople
      const price= req.body.price
-     
-        // how to passd trip id => req.params.id
-        // how to pass or get the user email ()who want to edit_
         res.json(await putTrip(id,place,email,numOfPeople,price));
       } catch (err) {
         throw err;

@@ -68,11 +68,7 @@ const allTrip = () => {
   return trips
 }
 const putTrip = async (tripId, newPlace, userEmail, newNumPeople, newPrice) => {
-  console.log('tripId',tripId)
   const y = trips.filter((trip) => trip.id == tripId)
-  console.log(userEmail);
-  console.log(y[0].numOfPeople)
-  console.log(y[0].price); 
   if (y.length === 0) {
     return 'trip with this id not found'
 
@@ -91,7 +87,7 @@ const putTrip = async (tripId, newPlace, userEmail, newNumPeople, newPrice) => {
   }
 
 }
-module.exports = {
+module.exports = { 
   register,
   login,
   getUsers,

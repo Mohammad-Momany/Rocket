@@ -43,7 +43,7 @@ const trips = [
     place:"Ajloun",
     numOfPeople: 8,
     price:"10JD",
-    owner:"user2@gmail.com",
+    owner:"user1@gmail.com",
     id:2
   },
   {
