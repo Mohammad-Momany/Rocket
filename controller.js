@@ -1,29 +1,29 @@
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { users, roles ,trips} = require('./models');
+const { users, roles, trips } = require('./models');
 
 const register = async (user) => {
   console.log('USER: ', user);
 
-  
 
-  if (savedUser.length === 0){
-    
+
+  if (savedUser.length === 0) {
+
     const newUser = user;
-   
+
     newUser.id = 2;
-   
+
     newUser.password = await bcrypt.hash(
       user.password,
       Number(process.env.SALT)
     );
-    
+
     users.push(newUser);
-    
+
     return newUser;
-    
+
   } else {
-    
+
     return 'User already exists';
   }
 
@@ -34,9 +34,9 @@ const login = async (user) => {
   if (savedUser.length === 0) {
     return 'User Not Found please register';
   } else {
-   
+
     if (await bcrypt.compare(user.password, savedUser[0].password)) {
-     
+
       const savedPermission = roles.filter((p) => p.id === savedUser[0].role_id);
 
       const payload = {
@@ -47,9 +47,9 @@ const login = async (user) => {
       const options = {
         expiresIn: process.env.TOKEN_EXPIRATION,
       };
-      
+
       return await jwt.sign(payload, process.env.SECRET, options);
-      
+
     } else {
       return 'Username or password not correct';
     }
@@ -60,45 +60,37 @@ const getUsers = () => {
   return users;
 };
 
-const addTrip = (trip)=>{
-    trips.push(trip)
-    return trips
+const addTrip = (trip) => {
+  trips.push(trip)
+  return trips
 }
- const allTrip=()=>{
-     return trips
- }
- const putTrip = async (tripId,newPlace,userEmail)=>{
-    // brind the trip usind tripId
-    //                                 1 how to get 77
-const y=trips.filter((trip)=>trip.id === 0 )
-console.log(trips.filter((trip)=>trip.id === 1))
-console.log(tripId);
-// 2 check if current trip this user can change it
-if(trips.filter((trip)=>trip.owner ===  userEmail )){
-  // 3 change the place of curnt trip
-  //trip = new place
-  
-
-  // 4 return this trip
-  return y
-
-
-}else{
-  return 'you not allowed change this trip'
+const allTrip = () => {
+  return trips
 }
-    /*
- {
-    place:"Ajloun",
-    numOfPeople: 8,
-    price:"10JD",
-    owner:"user2@gmail.com",
-    id:1
+const putTrip = async (tripId, newPlace, userEmail, newNumPeople, newPrice) => {
+  console.log('tripId',tripId)
+  const y = trips.filter((trip) => trip.id == tripId)
+  console.log(userEmail);
+  console.log(y[0].numOfPeople)
+  console.log(y[0].price); 
+  if (y.length === 0) {
+    return 'trip with this id not found'
+
+  } else {
+    if (userEmail === y[0].owner) {
+      y[0].place = newPlace
+      y[0].numOfPeople = newNumPeople
+      y[0].price = newPrice
+
+      return y 
+
+
+    } else {
+      return 'you not allowed change this trip'
+    }
   }
 
-
-    */
-  
- } 
+}
 module.exports = {
   register,
   login,

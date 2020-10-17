@@ -37,21 +37,21 @@ const trips = [
     numOfPeople: 8,
     price:"10JD",
     owner:"admin@gmail.com",  
-    id:0
+    id:1
   },
   {
     place:"Ajloun",
     numOfPeople: 8,
     price:"10JD",
     owner:"user2@gmail.com",
-    id:1
+    id:2
   },
   {
     place:"gggg",
     numOfPeople: 8,
     price:"10JD",
     owner:"user2@gmail.com",
-    id:77
+    id:3
   }
   
 ]
