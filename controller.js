@@ -67,14 +67,37 @@ const addTrip = (trip)=>{
  const allTrip=()=>{
      return trips
  }
- const putTrip = async (user)=>{
-     if(!(users[0].email === trips[0].owner)){
-         return "it isn't allowed for you"
-     }
-     if(users[0].email === trips[0].owner){
-         
-        return "it's allowed for you"
-    }
+ const putTrip = async (tripId,newPlace,userEmail)=>{
+    // brind the trip usind tripId
+    //                                 1 how to get 77
+const y=trips.filter((trip)=>trip.id === 0 )
+console.log(trips.filter((trip)=>trip.id === 1))
+console.log(tripId);
+// 2 check if current trip this user can change it
+if(trips.filter((trip)=>trip.owner ===  userEmail )){
+  // 3 change the place of curnt trip
+  //trip = new place
+  
+
+  // 4 return this trip
+  return y
+
+
+}else{
+  return 'you not allowed change this trip'
+}
+    /*
+ {
+    place:"Ajloun",
+    numOfPeople: 8,
+    price:"10JD",
+    owner:"user2@gmail.com",
+    id:1
+  }
+
+
+    */
+  
  } 
 module.exports = {
   register,

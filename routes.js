@@ -44,9 +44,15 @@ authRouter.get('/all',async(req,res) => {
         throw err;
       }
 })
-authRouter.put("/put",async (req,res)=>{
+authRouter.put("/put/:id/email",async (req,res)=>{
     try {
-        res.json(await putTrip(req.body));
+     const  id = req.params.id
+     const  email = req.body.email
+     const place= req.body.place
+     
+        // how to passd trip id => req.params.id
+        // how to pass or get the user email ()who want to edit_
+        res.json(await putTrip(id,place,email));
       } catch (err) {
         throw err;
       }
