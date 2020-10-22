@@ -10,7 +10,7 @@ const options = {
 
 // connecting mongoose
 mongoose.connect(process.env.DB_URL, options, () => {
-  console.log('DB READY TO USE');
+  console.log('DB READY TO USE'); 
 });
 
 // handle error / sucess

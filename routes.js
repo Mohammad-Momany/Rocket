@@ -39,7 +39,7 @@ authRouter.post('/add',async(req,res) => {
       } catch (err) {
         throw err;
       }
-})
+})        
 authRouter.get('/all',async(req,res) => {
     try {
         res.json(await allTrip(req.body));

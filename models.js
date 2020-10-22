@@ -7,7 +7,7 @@ const tripeUser = new mongoose.Schema({
   place: { type: String, required: true},
   numOfPeople: { type: Number, required: true },
   price: { type: String, required: true },
-  owner: { type: String, required: true }
+  owner: { type: String, required: true }   
 });
 
 

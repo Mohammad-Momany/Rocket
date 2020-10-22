@@ -91,7 +91,7 @@ const putTrip = async ( newPlace, newNumPeople, newPrice) => {
   return output
 }
 const deleteTrip = async () => {
-  const deleted = await tripeModel.deleteMany({}); 
+  const deleted = await tripeModel.deleteMany({});   
 }
 module.exports = { 
   register,
