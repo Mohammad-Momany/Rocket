@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login, getUsers , addTrip, allTrip ,putTrip} = require('./controller');
+const { register, login, getUsers , addTrip, allTrip ,putTrip,deleteTrip} = require('./controller');
 
 const middleware = require('./middlewares');
 
@@ -10,7 +10,7 @@ authRouter.get('/', async (req, res) => {
 });
 
 authRouter.get('/protected', middleware, (req, res) => {
-  res.json(['ali','khalil']);
+  res.json('all Information');
 });
 
 authRouter.post('/register', async (req, res) => {
@@ -31,7 +31,11 @@ authRouter.post('/login', async (req, res) => {
 
 authRouter.post('/add',async(req,res) => {
     try {
-        res.json(await addTrip(req.body));
+     const email = req.body.owner
+     const place= req.body.place
+     const numOfPeople= req.body.numOfPeople
+     const price= req.body.price
+        res.json(await addTrip(email,place,numOfPeople,price));
       } catch (err) {
         throw err;
       }
@@ -43,17 +47,22 @@ authRouter.get('/all',async(req,res) => {
         throw err;
       }
 })
-authRouter.put("/put/:id/email",async (req,res)=>{
+authRouter.put("/put",async (req,res)=>{
     try {
-     const id = req.params.id
-     const email = req.body.owner
+    //  const id = req.params.id
      const place= req.body.place
      const numOfPeople= req.body.numOfPeople
      const price= req.body.price
-        res.json(await putTrip(id,place,email,numOfPeople,price));
+        res.json(await putTrip(place,numOfPeople,price));
       } catch (err) {
         throw err;
       }
 })
- 
+authRouter.delete("/delete", async(req, res) => {
+  try {
+    res.json(await deleteTrip(req.body));
+  } catch (err) {
+    throw err;
+  }
+  });
 module.exports =authRouter

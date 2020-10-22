@@ -1,12 +1,11 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { users, roles, trips } = require('./models');
+const { tripeModel } = require('./models');
+const mongoose = require('mongoose');
+const db = require("./db");
 
 const register = async (user) => {
   console.log('USER: ', user);
-
-
-
   if (savedUser.length === 0) {
 
     const newUser = user;
@@ -18,12 +17,9 @@ const register = async (user) => {
       Number(process.env.SALT)
     );
 
-    users.push(newUser);
-
+    users.push(newUser); 
     return newUser;
-
   } else {
-
     return 'User already exists';
   }
 
@@ -59,33 +55,43 @@ const login = async (user) => {
 const getUsers = () => {
   return users;
 };
+   
+const addTrip = (email,place,numOfPeople,price) => {
+  console.log(email);
+  console.log(place);
+  console.log(numOfPeople);
+  console.log(price);
+  const newTodo = new tripeModel({
+    email1:email,
+    place1:place,
+    numOfPeople1:numOfPeople,
+    price1:price
+  });
+  newTodo
+  .save()  
+   .then((result) => {
+     console.log('RESULT: ', result);
+     res.json(result);
+   })
+   .catch((err) => {
+       console.log('ERR: ', err);
+   });
+};
 
-const addTrip = (trip) => {
-  trips.push(trip)
-  return trips
+const allTrip = async () => {
+  const result = await tripeModel.find({});
+  console.log('allTrip');
+  return result;
 }
-const allTrip = () => {
-  return trips
+const putTrip = async ( newPlace, newNumPeople, newPrice) => {
+  console.log(newPlace);
+  console.log(newNumPeople);
+  console.log(newPrice);
+  const output = await tripeModel.updateMany({ place: newPlace},{numPeople:newNumPeople},{price:newPrice})
+  return output
 }
-const putTrip = async (tripId, newPlace, userEmail, newNumPeople, newPrice) => {
-  const y = trips.filter((trip) => trip.id == tripId)
-  if (y.length === 0) {
-    return 'trip with this id not found'
-
-  } else {
-    if (userEmail === y[0].owner) {
-      y[0].place = newPlace
-      y[0].numOfPeople = newNumPeople
-      y[0].price = newPrice
-
-      return y 
-
-
-    } else {
-      return 'you not allowed change this trip'
-    }
-  }
-
+const deleteTrip = async () => {
+  const deleted = await tripeModel.deleteMany({}); 
 }
 module.exports = { 
   register,
@@ -93,5 +99,6 @@ module.exports = {
   getUsers,
   addTrip,
   allTrip,
-  putTrip
-};
+  putTrip,
+  deleteTrip
+};  
