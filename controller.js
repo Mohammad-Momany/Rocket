@@ -57,10 +57,6 @@ const getUsers = () => {
 };
    
 const addTrip = (email,place,numOfPeople,price) => {
-  console.log(email);
-  console.log(place);
-  console.log(numOfPeople);
-  console.log(price);
   const newTodo = new tripeModel({
     email1:email,
     place1:place,
@@ -80,13 +76,9 @@ const addTrip = (email,place,numOfPeople,price) => {
 
 const allTrip = async () => {
   const result = await tripeModel.find({});
-  console.log('allTrip');
   return result;
 }
 const putTrip = async ( newPlace, newNumPeople, newPrice) => {
-  console.log(newPlace);
-  console.log(newNumPeople);
-  console.log(newPrice);
   const output = await tripeModel.updateMany({ place: newPlace},{numPeople:newNumPeople},{price:newPrice})
   return output
 }

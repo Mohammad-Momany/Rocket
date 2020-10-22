@@ -28,7 +28,7 @@ authRouter.post('/login', async (req, res) => {
     throw err;
   }
 });
-
+ 
 authRouter.post('/add',async(req,res) => {
     try {
      const email = req.body.owner
