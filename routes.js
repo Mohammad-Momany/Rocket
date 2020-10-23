@@ -31,10 +31,7 @@ authRouter.post('/login', async (req, res) => {
  
 authRouter.post('/add',async(req,res) => {
     try {
-     const email = req.body.owner
-     const place= req.body.place
-     const numOfPeople= req.body.numOfPeople
-     const price= req.body.price
+      const{email,place,numOfPeople,price}=req.body
         res.json(await addTrip(email,place,numOfPeople,price));
       } catch (err) {
         throw err;
@@ -49,10 +46,7 @@ authRouter.get('/all',async(req,res) => {
 })
 authRouter.put("/put",async (req,res)=>{
     try {
-    //  const id = req.params.id
-     const place= req.body.place
-     const numOfPeople= req.body.numOfPeople
-     const price= req.body.price
+      const{place,numOfPeople,price}=req.body
         res.json(await putTrip(place,numOfPeople,price));
       } catch (err) {
         throw err;

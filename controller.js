@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { tripeModel } = require('./models');
+const { tripeModel ,accounts} = require('./models');
 const mongoose = require('mongoose');
 const db = require("./db");
 
@@ -52,11 +52,17 @@ const login = async (user) => {
   }
 };
 
-const getUsers = () => {
-  return users;
+const getUsers = async () => {
+  const result = await accounts.find({});
+  return result;;
 };
    
 const addTrip = (email,place,numOfPeople,price) => {
+  console.log(email);
+  console.log(place);
+  console.log(numOfPeople);
+  console.log(price);
+
   const newTodo = new tripeModel({
     email1:email,
     place1:place,
@@ -68,7 +74,7 @@ const addTrip = (email,place,numOfPeople,price) => {
    .then((result) => {
      console.log('RESULT: ', result);
      res.json(result);
-   })
+   }) 
    .catch((err) => {
        console.log('ERR: ', err);
    });
@@ -79,6 +85,7 @@ const allTrip = async () => {
   return result;
 }
 const putTrip = async ( newPlace, newNumPeople, newPrice) => {
+  console.log(newPrice);
   const output = await tripeModel.updateMany({ place: newPlace},{numPeople:newNumPeople},{price:newPrice})
   return output
 }

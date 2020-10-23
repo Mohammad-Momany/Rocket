@@ -1,8 +1,5 @@
 const mongoose = require("mongoose")
 
-
-
-
 const tripeUser = new mongoose.Schema({
   place: { type: String, required: true},
   numOfPeople: { type: Number, required: true },
@@ -10,9 +7,14 @@ const tripeUser = new mongoose.Schema({
   owner: { type: String, required: true }   
 });
 
-
+const accountUser = new mongoose.Schema({
+  email: { type: String, required: true,unique:true},
+  passworde: { type: Number, required: true, minlength:6 }
+});
 const tripeModel = mongoose.model('Tripe', tripeUser);
-module.exports = {tripeModel};
+const accounts = mongoose.model('UserEmail', accountUser);
+
+module.exports = {tripeModel,accounts};
 
 
 
