@@ -1,15 +1,16 @@
 const mongoose = require("mongoose")
+const{isEmail}=require("validator")
 
 const tripeUser = new mongoose.Schema({
   place: { type: String, required: true},
   numOfPeople: { type: Number, required: true },
   price: { type: String, required: true },
-  owner: { type: String, required: true }   
+  email: { type: String, required: true }   
 });
 
 const accountUser = new mongoose.Schema({
-  email: { type: String, required: true,unique:true},
-  passworde: { type: Number, required: true, minlength:6 }
+  email: { type: String, required: true,unique:true, validate: isEmail},
+  passworde: { type: Number, required: true, minlength:8 }
 });
 const tripeModel = mongoose.model('Tripe', tripeUser);
 const accounts = mongoose.model('UserEmail', accountUser);

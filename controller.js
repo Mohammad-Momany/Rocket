@@ -4,24 +4,38 @@ const { tripeModel ,accounts} = require('./models');
 const mongoose = require('mongoose');
 const db = require("./db");
 
+
+
+
+
+
+
+
 const register = async (user) => {
-  console.log('USER: ', user);
-  if (savedUser.length === 0) {
 
-    const newUser = user;
 
-    newUser.id = 2;
+  accounts.pre("save",async ()=>{
+    const salt = await bcrypt.genSalt()
+    this.password = await bcrypt.hash(this.password, salt)
+  })
 
-    newUser.password = await bcrypt.hash(
-      user.password,
-      Number(process.env.SALT)
-    );
+  // console.log('USER: ', user);
+  // if (savedUser.length === 0) {
 
-    users.push(newUser); 
-    return newUser;
-  } else {
-    return 'User already exists';
-  }
+  //   const newUser = user;
+
+  //   newUser.id = 2;
+
+  //   newUser.password = await bcrypt.hash(
+  //     user.password,
+  //     Number(process.env.SALT)
+  //   );
+
+  //   users.push(newUser); 
+  //   return newUser;
+  // } else {
+  //   return 'User already exists';
+  // }
 
 };
 const login = async (user) => {
@@ -58,22 +72,16 @@ const getUsers = async () => {
 };
    
 const addTrip = (email,place,numOfPeople,price) => {
-  console.log(email);
-  console.log(place);
-  console.log(numOfPeople);
-  console.log(price);
-
   const newTodo = new tripeModel({
-    email1:email,
-    place1:place,
-    numOfPeople1:numOfPeople,
-    price1:price
+    email,
+    place,
+    numOfPeople,
+    price
   });
   newTodo
   .save()  
    .then((result) => {
      console.log('RESULT: ', result);
-     res.json(result);
    }) 
    .catch((err) => {
        console.log('ERR: ', err);
@@ -86,7 +94,7 @@ const allTrip = async () => {
 }
 const putTrip = async ( newPlace, newNumPeople, newPrice) => {
   console.log(newPrice);
-  const output = await tripeModel.updateMany({ place: newPlace},{numPeople:newNumPeople},{price:newPrice})
+  const output = await tripeModel.update({ newPlace },{ newNumPeople },{ newPrice })
   return output
 }
 const deleteTrip = async () => {
