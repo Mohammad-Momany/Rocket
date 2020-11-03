@@ -1,0 +1,23 @@
+#btn{
+    background-color:black;
+    color: white;
+    border: none;
+    padding: 2px 8px ;
+    border-radius: 50%;
+    cursor: pointer;
+    float: right;
+}
+
+#form{
+    display: flex;
+}
+
+.inp-btn{
+    float: 1px;
+}
+
+
+h3{
+    text-align: center;
+    background-color: teal;
+}
