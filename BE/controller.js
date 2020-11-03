@@ -92,8 +92,8 @@ const allTrip = async () => {
   const result = await tripeModel.find({});
   return result;
 }
-const putTrip = async ( newPlace, newNumPeople, newPrice) => {
-  console.log(newPrice);
+const putTrip = async ( newPlace, newNumPeople, newPrice ,id) => {
+  console.log(id);
   const output = await tripeModel.update({ newPlace },{ newNumPeople },{ newPrice })
   return output
 }

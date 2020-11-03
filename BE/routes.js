@@ -44,10 +44,11 @@ authRouter.get('/all',async(req,res) => {
         throw err;
       }
 })
-authRouter.put("/put",async (req,res)=>{
+authRouter.put("/put/:id",async (req,res)=>{
     try {
+      const{id}=req.params
       const{place,numOfPeople,price}=req.body
-        res.json(await putTrip(place,numOfPeople,price));
+        res.json(await putTrip(place,numOfPeople,price,id));
       } catch (err) {
         throw err;
       }
