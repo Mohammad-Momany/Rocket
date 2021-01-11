@@ -1,8 +1,8 @@
-const User = require("../schema/userSchema");
+const User = require("../schemas/userSchema");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
-const { registerVaildation } = require("../schema/validation");
+const { registerVaildation } = require("../schemas/validation");
 
 const register = async (req, res) => {
   const { error } = registerVaildation(req.body);

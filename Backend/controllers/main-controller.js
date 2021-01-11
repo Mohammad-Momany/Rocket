@@ -1,5 +1,5 @@
 const mainRouter = require("express").Router();
-const verifyToken = require("../router/verifyToken");
+const verifyToken = require("../auth/verifyToken");
 require("dotenv").config();
 
 const register = require("../Models/register");
