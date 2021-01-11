@@ -1,9 +1,9 @@
-const User = require("../schema/userSchema");
+const User = require("../schemas/userSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
-const { loginValidation } = require("../schema/validation");
+const { loginValidation } = require("../schemas/validation");
 
 const login = async (req, res) => {
   const { error } = loginValidation(req.body);

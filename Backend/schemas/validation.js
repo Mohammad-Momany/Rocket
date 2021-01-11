@@ -23,11 +23,11 @@ const loginValidation = (data) => {
 
 const tripeInfoVaildation = (data) => {
   const schema = Joi.object({
+    title: Joi.string().min(10).required(),
     place: Joi.string().min(2).required(),
     numOfPeople: Joi.number().required(),
     price: Joi.string().required(),
   });
-
   return schema.validate(data);
 };
 
